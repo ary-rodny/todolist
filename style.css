@@ -1,0 +1,238 @@
+:root{
+    --primaryColor: #1d69ce;
+    --lightColor: #f4f4f4;
+    --darkColor: #333;
+    --warningColor:rgb(99,36,36);
+}
+
+*,*::before,*::after{
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+body{
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
+    background-color: var(--primaryColor);
+    color: var(--lightColor);
+
+    display: grid;
+    grid: 
+    "header header header header" auto
+    "...... tasks  active ......" auto /
+    1fr minmax(100px, 300px)  minmax(300px,500px) 1fr;
+}
+
+.title{
+    grid-area: header;
+    text-align: center;
+    font-size: calc(7vw, + 2rem);
+    font-weight: 900;
+    border-bottom: 2px solid rgb(23, 94, 187);
+}
+
+.tasks{
+    grid-area: tasks;
+    /* padding: 0; */
+}
+
+
+.tasks__list{
+    line-height: 1.7;
+    font-size: 1.2rem;
+    list-style: circle;
+    padding-left: 1.1em;
+}
+
+.tasks__list-name{
+    cursor: pointer;
+}
+
+.tasks__list-name:hover{
+    opacity: .7;
+}
+
+.tasks__list--active{
+    font-weight: 800;
+}
+
+form{
+    display: flex;
+}
+
+.btn{
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background: 0;
+    color: inherit;
+}
+
+.btn--add{
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-right: .25em;
+}
+
+.btn--add:hover{
+    opacity: .5;
+}
+
+.btn--delete{
+    letter-spacing: .8px;
+}
+
+.btn--delete:hover{
+    color: var(--warningColor);
+}
+
+.btn.task{
+    color: var(--primaryColor);
+}
+
+input.new{
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    font-size: inherit;
+    transition: border 20ms ease-in-out;
+    outline: none;
+    order: 2;
+    padding: .25em;
+}
+
+input.new:focus::placeholder{
+    opacity: .2;
+}
+
+input.new:focus{
+    border-bottom-width: 3px;
+}
+
+.new.list{
+    font-size: 1.1rem;
+}
+
+.todo{
+ grid-area: active;
+ --spacer: 2rem;
+ background: var(--lightColor);
+ color: var(--darkColor);
+}
+
+.todo__header{
+    background: #e4e4e4;
+    padding: var(--spacer);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo__title{
+    margin: 0;
+    margin-right: 1rem;
+}
+
+.tasks-count{
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.todo__body{
+    padding: var(--spacer);
+    position: relative;
+}
+
+[type="checkbox"]{
+    opacity: 0;
+    position: absolute;
+}
+
+.task{
+    position: relative;
+}
+
+.task::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: currentColor;
+    /* bottom: -40%; */
+    /* bottom: 0px; */
+    top: 25px;
+    opacity: 0.1;
+}
+
+.task label{
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.task label::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    left: 1.9rem;
+    right: 0;
+    height: 3px;
+    background-color: red;
+    transform: scale(0);
+    transition: transform 250ms ease-in-out;
+    transform-origin: right;
+}
+
+
+
+.custum-checkbox{
+    --size: .75em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    margin-right: var(--size);
+    cursor: pointer;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    transform:  scale(1);
+    transition: transform 200ms ease-in-out;
+}
+
+.task:hover .custum-checkbox, [type="checkbox"]:focus + label .custum-checkbox{
+    transform: scale(1.1);
+    color: var(--primaryColor);
+}
+
+[type="checkbox"]:checked + label .custum-checkbox{
+    background: var(--primaryColor);
+     border-color: var(--primaryColor);
+     box-shadow: inset 0 0 0px 2px white;
+}
+
+[type="checkbox"]:checked + label {
+    opacity: .5;
+}
+
+[type="checkbox"]:checked + label::after {
+    transform: scale(1);
+    transform-origin: left; 
+}
+
+
+
+.tasks-delete{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    position: relative;
+    left: 0;
+    bottom: -60px;
+    color: var(--lightColor);
+    margin-top: 4rem;
+}
